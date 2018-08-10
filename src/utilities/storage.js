@@ -15,8 +15,6 @@ export const parseStorage = storage => {
 export const performInitialSync = (storageSource, syncMap) => {
   const storage = parseStorage(storageSource)
 
-  debugger
-
   // Don't judge me for the for loop... It is the first I have written
   // in 2 years, but I was just soooo fed up with reduce and nasty code.
   for (const [source, target] of syncMap.original) {

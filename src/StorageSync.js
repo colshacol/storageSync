@@ -52,11 +52,12 @@ export default class StorageSync extends Object {
     return property ? self[property] : self
   }
 
+  // storage.accessToken = 'yolo'
+
   @nonEnumerable
   _proxySet = self => (target, property, value) => {
     const _value = json.parse(value)
     // Apply the change to the living storage object.
-    // Reflect.set(self, property, _value)
     self[property] = value
     // Apply the change to the storageSource.
     self._setItem(property, _value)
@@ -67,12 +68,15 @@ export default class StorageSync extends Object {
 
   @nonEnumerable
   _proxyApply = self => (target, _, args) => {
+    const key = self._nameSpace + args[0]
+
     if (args.length === 1) {
-      return self[self._nameSpace + args[0]]
+      return self[key]
     }
 
     if (args.length === 2) {
-      self[self._nameSpace + args[0]] = args[1]
+      self[key] = args[1]
+      self._setItem(key, args[1])
       return args[1]
     }
   }

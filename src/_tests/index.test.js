@@ -109,3 +109,6 @@ describe('Helper/utility methods.', () => {
     expect(Array.isArray(...storage)).toBeTruthy()
   })
 })
+
+// TODO: Test namespacing.
+// TODO: Test namespacing storage persistence.
